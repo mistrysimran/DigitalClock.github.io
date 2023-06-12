@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <link href="https://allfont.net/allfont.css?fonts=digital-7-mono" rel="stylesheet" type="text/css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Changa&family=Orbitron&family=Rationale&family=Teko&family=Tourney&display=swap" rel="stylesheet"> -->
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/10248/10248644.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    
+    <style>
+        *
+        {
+            margin: 0; padding: 0;
+            box-sizing: border-box;
+            /* border: 1px solid; */
+        }
+        @font-face
+        {
+            font-family:'Digital-7 Mono';
+            src: url('./digital-7.regular.ttf');
+        }
+        body
+        {
+            
+            background: url('https://img.freepik.com/free-vector/stylish-white-background-with-diagonal-lines_1017-33199.jpg?w=1380&t=st=1684388136~exp=1684388736~hmac=397cb87aa4b096814fe9b76d1875924954ee8e390511e6d26fbcc3830a028c5d');
+            /* background: url('https://img.freepik.com/free-photo/banner-with-abstract-background-with-green-paper-cutout-waves_24972-1914.jpg?w=1060&t=st=1685123892~exp=1685124492~hmac=4568415e4fd0256964213db75b71d0fcc26ad3d498fd75d793f5da967f1c5669'); */
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .item1 {grid-area: hr;}
+        .item2 {grid-area: coln;}
+        .item3 {grid-area: min;}
+        .item4 {grid-area: col1;}
+        .item5 {grid-area: sec;}
+        .item6 { grid-area: am_pm;}
+        .item7 {grid-area: dt;}
+        .main
+        {
+            border: 20px solid rgb(39, 37, 37);
+            height: 30vh;
+            width: 55vh;
+            border-radius: 20px;
+            background-image: linear-gradient(to bottom right, darkslategray 50%, gray );
+            
+            display: grid;
+            grid-template-areas: 'hr coln min col1 sec am_pm'
+                                 'dt dt dt dt dt dt';
+            gap: 15px;
+            row-gap: 1px;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;            
+            margin: auto;
+            text-align: center;
+            font-family: 'Digital-7 Mono', arial !important;
+            /* font-family: 'Rationale', sans-serif; */
+            /* font-family: 'Tourney',cursive; */
+
+            color: lightseagreen;
+            font-size: xxx-large;
+        }
+        .main div:not(:last-child)
+        {
+            font-size: 60px;
+            /* position: fixed; */
+        }
+        .main::before
+        {
+            content: "";
+            position: absolute;
+            width: 25vh;
+            height: 2vh;
+            background: rgb(39, 37, 37);
+            left:25%;
+            top: -30px;
+            border-radius: 10px;
+        }
+                
+    </style>
+</head>
+<body>
+
+    <div class="main">
+        <div class="item1" id="hour"> </div>
+        <div class="item2" id="colon">:</div> 
+        <div class="item3" id="min"> </div>
+        <div class="item4" id="colon">:</div> 
+        <div class="item5" id="sec"> </div>
+        <div class="item6" id="am-pm"> </div>
+        <div class="item7" id="date"></div>
+    </div>
+   <script>
+        function time()
+        {
+            var date = new Date();
+
+            document.getElementById("hour").innerHTML=String(date.getHours()).padStart(2, '0');
+            document.getElementById("min").innerHTML=String(date.getMinutes()).padStart(2, '0');
+            document.getElementById("sec").innerHTML=String(date.getSeconds()).padStart(2, '0');
+
+            var ampm = date.getHours()>=12 ? 'PM' : 'AM';
+            // if(date.getHours()>=12)
+            //     ampm='PM'
+            // else
+            //     ampm = "AM"
+            document.getElementById("am-pm").innerHTML = ampm
+
+            const days = ['Sun','Mon','Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            var day = days[date.getDay()]
+
+            var dt = date.getDate();
+            
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            var month = months[date.getMonth()];
+
+            var year = date.getFullYear();
+
+            document.getElementById("date").innerHTML= day+ " " +dt + " " + month + " " + year
+        }
+        setInterval(time,1000)
+    </script>
+</body>
+</html>
